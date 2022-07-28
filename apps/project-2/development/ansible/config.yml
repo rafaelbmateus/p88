@@ -1,0 +1,10 @@
+all:
+  hosts:
+    45.55.43.248
+  vars:
+    app: project-2
+    env: development
+    image: sapk/cloud9:golang-alpine
+    c9_user: user
+    c9_password: secret
+    docker_version: 4.4.1

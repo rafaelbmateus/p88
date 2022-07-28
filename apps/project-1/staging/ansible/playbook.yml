@@ -1,0 +1,23 @@
+---
+- name: provision
+  hosts: all
+  remote_user: root
+  roles:
+    - role: docker
+      tags: docker
+
+    - role: pip
+      tags: pip
+      pip_install_packages:
+      - name: docker
+        version: "{{ docker_version }}"
+
+  tasks:
+    - name: Create container
+      tags: app
+      docker_container:
+        name: "{{ app }}-{{ env }}"
+        image: "{{ image }}"
+        state: started
+        ports:
+          - 80:80

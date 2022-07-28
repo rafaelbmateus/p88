@@ -1,0 +1,26 @@
+---
+- name: provision
+  hosts: all
+  remote_user: root
+  roles:
+    - role: docker
+      tags: docker
+
+    - role: pip
+      tags: pip
+      pip_install_packages:
+      - name: docker
+        version: "4.4.1"
+
+  tasks:
+    - name: Create container
+      tags: app
+      docker_container:
+        name: "{{ app }}-{{ env }}"
+        image: "{{ image }}"
+        command: "--auth {{ c9_user }}:{{ c9_password }}"
+        state: started
+        volumes:
+          - ".:/workspace"
+        ports:
+          - 80:8181
