@@ -20,8 +20,10 @@
 - name: Ensure handlers are notified now to avoid firewall conflicts.
   meta: flush_handlers
 
-- include_tasks: docker-compose.yml
-  when: docker_install_compose | bool
+# TODO fix
+# {"msg": "The conditional check 'docker_install_compose | bool' failed. The error was: No filter named 'bool' found.\n\nThe error appears to be in '/p88/lib/ansible/roles/docker/tasks/main.yml': line 23, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- include_tasks: docker-compose.yml\n  ^ here\n"}
+# - include_tasks: docker-compose.yml
+#   when: docker_install_compose | bool
 
 - include_tasks: docker-users.yml
   when: docker_users | length > 0

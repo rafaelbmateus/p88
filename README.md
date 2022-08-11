@@ -97,7 +97,7 @@ Para entender melhor, vamos dar uma olhada no arquivo `locals.tf`:
 Esse arquivo é onde ficam as declarações da variáveis locais
 que serão utilizadas para a criação dos recursos:
 
-```
+```hcl
 locals {
 	env = "production"
 
@@ -113,7 +113,7 @@ locals {
 
 No `main.tf`, são as definições dos recursos:
 
-```
+```hcl
 provider "digitalocean" {
   token = var.do_token
   version = "1.12.0"
@@ -217,6 +217,9 @@ Para mais informações acesse de como criar o Access Token e configurar veja os
 - [How to Create a Personal Access Token](https://www.digitalocean.com/docs/apis-clis/api/create-personal-access-token)
 - [Terraform - Digital Ocean Provider](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs)
 
+E para mais informações a respeito do SSH Fingerprint:
+- [How-to Add SSH Keys to New or Existing Droplets](https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/)
+
 Depois vamos construir a imagem docker do p88 com o terraform e
 [Ansible](https://www.ansible.com)
 para rodar os provisionamentos:
@@ -230,7 +233,7 @@ make build
 
 ### Criando a infraestrutura com Terraform
 
-Os comandos a baixo utilizam o terraform
+Os comandos abaixo utilizam o terraform
 para gerenciar a infraestrutura.
 
 Para criar os recursos, execute:
@@ -281,5 +284,5 @@ CONTAINER ID   IMAGE                 COMMAND                  CREATED          S
 863f134396b5   nginx:stable-alpine   "/docker-entrypoint.…"   47 seconds ago   Up 45 seconds   0.0.0.0:80->80/tcp   project-1
 ```
 
-Acessando o `project-2` como um ambiente de dessenvolimento:
+Acessando o `project-2` como um ambiente de desenvolvimento:
 ![alt text](docs/project-2.png)

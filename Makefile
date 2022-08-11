@@ -2,6 +2,7 @@ project = p88
 version ?= latest
 img = $(project):$(version)
 vol = $(shell pwd):/$(project)
+username = devops
 tags ?= all
 
 pub_key ?= $(HOME)/.ssh/id_rsa.pub
@@ -61,11 +62,11 @@ ansible: ##@ansible Apply ansible playbook to one app
 	docker run -it \
 		-w /$(project)/apps/$(app)/$(env)/ansible/ \
 		-v $(vol) \
-		-v $(pvt_key):/root/.ssh/id_rsa \
-		-v $(pub_key):/root/.ssh/id_rsa.pub \
+		-v $(pvt_key):/$(username)/.ssh/id_rsa \
+		-v $(pub_key):/$(username)/.ssh/id_rsa.pub \
 		--rm $(img) \
 		ansible-playbook -i ./config.yml \
-		--private-key /root/.ssh/id_rsa \
+		--private-key /$(username)/.ssh/id_rsa \
 		./playbook.yml -t $(tags)
 
 .PHONY: clean
